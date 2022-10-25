@@ -43,11 +43,6 @@ class iniciador():
         self.Label_text_fabricante.place (x= 310,y=380,anchor="center")
         self.Entry_fabricante = Entry(self.ventana, width=25, bg="light green")
         self.Entry_fabricante.place (x= 310,y= 410,anchor="center")
-
         self.ventana.mainloop() #El loop principal de toda la pantalla principa
-
-
-
-
 
 iniciador()
