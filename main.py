@@ -1,0 +1,3 @@
+#import Principal
+
+#Principal.iniciador()
