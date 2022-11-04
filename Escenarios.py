@@ -113,7 +113,7 @@ class escenario2:
         
         #Imagenes
 
-        self.canvas.create_image(250,250,image = self.imagen_robot)
+        robot = self.canvas.create_image(250,250,image = self.imagen_robot)
 
         self.canvas.create_image(250,50,image = self.imagen_cono)
 
@@ -121,7 +121,17 @@ class escenario2:
 
         self.canvas.create_image(150,400,image = self.imagen_arbol)
 
+
+        def move_down (self):
+            self.dx = 0
+            self.dy = 100
+            self.canvas.move(robot, self.dx, self.dy)
+            print("down")
+
+        self.master.bind("s", move_down)
+
         self.master.mainloop()
+        
 """        
 if __name__ == "__main__":
     
