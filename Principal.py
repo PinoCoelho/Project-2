@@ -1,6 +1,6 @@
 from tkinter import *
 import os
-import prueba
+#import prueba
 
 class iniciador:
 
@@ -24,7 +24,7 @@ class iniciador:
         self.fondo = iniciador.cargarImagen(self,"fondo.gif") #Pone la imagen de fondo. 
         self.LabelFondo=Label(self.ventana, image=self.fondo) #Etiqueta que va a contener la imagen.
         self.LabelFondo.place (x=0, y=0) #Posición de la imagen.
-        self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="red",fg="yellow",height= 2,width=7,command= prueba.escenario1) #Botón para entrar a la pantalla secundaria llamada game.
+        self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="red",fg="yellow",height= 2,width=7) #Botón para entrar a la pantalla secundaria llamada game.
         self.Boton_iniciar.place(x=308,y=450, anchor = "center")
         self.Boton_salir = Button (self.ventana,text="APAGAR", bg="red",fg="yellow",height= 2,width=7,command= self.ventana.destroy)
         self.Boton_salir.place (x= 510,y= 20)
