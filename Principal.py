@@ -4,8 +4,9 @@ import os
 
 class iniciador:
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.inicio()
+        self.scene = iniciador.scene
 
     def cargarImagen(self,nombre): #Funcion para cargar la imagen. 
         """
@@ -24,7 +25,7 @@ class iniciador:
         self.fondo = iniciador.cargarImagen(self,"fondo.gif") #Pone la imagen de fondo. 
         self.LabelFondo=Label(self.ventana, image=self.fondo) #Etiqueta que va a contener la imagen.
         self.LabelFondo.place (x=0, y=0) #Posición de la imagen.
-        self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="red",fg="yellow",height= 2,width=7) #Botón para entrar a la pantalla secundaria llamada game.
+        self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="red",fg="yellow",height= 2,width=7,command= self.scene) #Botón para entrar a la pantalla secundaria llamada game.
         self.Boton_iniciar.place(x=308,y=450, anchor = "center")
         self.Boton_salir = Button (self.ventana,text="APAGAR", bg="red",fg="yellow",height= 2,width=7,command= self.ventana.destroy)
         self.Boton_salir.place (x= 510,y= 20)
@@ -45,6 +46,17 @@ class iniciador:
         self.Entry_fabricante = Entry(self.ventana, width=25, bg="light green")
         self.Entry_fabricante.place (x= 310,y= 410,anchor="center")
         self.ventana.mainloop() #El loop principal de toda la pantalla principal
+
+    def scene (self):
+        self.root = Toplevel()
+        self.root.title("ROBOT") #Titulo de la pantalla principal. 
+        self.root.minsize(600,700) #Dimensiones de la pantalla.
+        self.root.resizable(width=NO,height=NO) #Que no se puede modificar. 
+        self.fondo = iniciador.cargarImagen(self,"fondo.gif")
+        self.Boton_escenario1 = Button(self.root,text="INICIAR",bg="red",fg="yellow",height= 2,width=7)
+        self.Boton_escenario1.place(x=308,y=450, anchor = "center")
+        self.root.mainloop()
+
 
 
 iniciador()
