@@ -15,16 +15,16 @@ class escenario1:
 
         self.imagen_robot = PhotoImage (file = 'Images/robot.png')
         self.imagen_cono = PhotoImage (file = 'Images/cono.png')
-    
+        
         self.master.title("ESCENARIO 1")
  
     
         self.master.minsize(502,502) 
- 
+        self.canvas.resizable(False,False)
     
-    
-        self.canvas = Canvas(self.master)
 
+        self.canvas = Canvas(self.master)
+    
         #Horizontales
         
         self.canvas.create_line(700, 100, 0, 100)
@@ -113,7 +113,7 @@ class escenario2:
  
     
         self.master.minsize(502,502) 
- 
+        self.master.resizable(False,False)
     
     
         self.canvas = Canvas(self.master)
