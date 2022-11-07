@@ -5,8 +5,6 @@ class escenario1:
 
     def __init__(self, master = None):
         self.master = master
- 
-        
         self.create()
  
     def create(self):
@@ -15,16 +13,17 @@ class escenario1:
 
         self.imagen_robot = PhotoImage (file = 'Images/robot.png')
         self.imagen_cono = PhotoImage (file = 'Images/cono.png')
-        
+        self.imagen_arbol = PhotoImage (file = 'Images/arbol.png')
+    
         self.master.title("ESCENARIO 1")
  
     
         self.master.minsize(502,502) 
-        self.canvas.resizable(False,False)
+        self.master.resizable(False,False)
     
-
+    
         self.canvas = Canvas(self.master)
-    
+
         #Horizontales
         
         self.canvas.create_line(700, 100, 0, 100)
@@ -49,15 +48,21 @@ class escenario1:
         
         self.canvas.create_line(200, 0, 200, 700)
         
-        self.canvas.create_line(100, 0, 100, 700) 
-        
+        self.canvas.create_line(100, 0, 100, 700)
         #Imagenes
 
         self.robot = self.canvas.create_image(50,50,image = self.imagen_robot,tags ="self.robot")
 
-        self.canvas.create_image(250,250,image = self.imagen_cono)
+        self.cono = self.canvas.create_image(250,250,image = self.imagen_cono)
 
         self.canvas.pack(fill = BOTH, expand = True)
+
+        def colision_cono (self):
+            pos1 = self.canvas.bbox(self.robot)
+            pos2 = self.canvas.bbox(self.cono)
+            if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
+                self.canvas.move(self.robot, 0, 0)
+                print ("¡Colisión Cono!")
 
         def move_left(temp):
             x1,y1,x2,y2=self.canvas.bbox("self.robot")
@@ -65,28 +70,32 @@ class escenario1:
                 return
             else:
                 self.canvas.move(self.robot,-5,0)
-                print("Left") #Only for test purpose.Remove if not needed.
+                colision_cono(self)
+                #print("Left")
         def move_right(temp):
             x1,y1,x2,y2=self.canvas.bbox("self.robot")
             if(x2>=self.canvas.winfo_width()-5):
                 return
             else:
                 self.canvas.move(self.robot,5,0)
-                print("Right")  #Only for test purpose.Remove if not needed.
+                colision_cono(self)
+                #print("Right")  
         def move_up(temp):
             x1,y1,x2,y2=self.canvas.bbox("self.robot")
             if(y1<=0):
                 return
             else:
                 self.canvas.move(self.robot,0,-5) 
-                print("Up")    #Only for test purpose.Remove if not needed. 
+                colision_cono(self)
+                #print("Up")  
         def move_down(temp):
             x1,y1,x2,y2=self.canvas.bbox("self.robot")
             if(y2>=self.canvas.winfo_height()-5):
                 return
             else:
                 self.canvas.move(self.robot,0,5)  
-                print("Down")  #Only for test purpose.Remove if not needed.
+                colision_cono(self)
+                #print("Down")  
         
         self.master.bind('d', move_right)
         self.master.bind('a', move_left)
@@ -150,26 +159,48 @@ class escenario2:
 
         self.cono = self.canvas.create_image(250,50,image = self.imagen_cono)
 
+        self.arbol = self.canvas.create_image(150,400,image = self.imagen_arbol)
+
         self.canvas.pack(fill = BOTH, expand = True)
 
-        self.canvas.create_image(150,400,image = self.imagen_arbol)
+        #self.menubar = Menu(self.master) #Se crea la barra del menú.
+        #self.menubar.add_command(label="PRESENTACIÓN",command= print("Ola")) #Se crea el comando para que.
+        #self.master.config(menu=self.menubar) #Se posiciona la barra del menú.
 
-        self.menubar = Menu(self.master) #Se crea la barra del menú.
-        self.menubar.add_command(label="PRESENTACIÓN",command= print("Ola")) #Se crea el comando para que.
-        self.master.config(menu=self.menubar) #Se posiciona la barra del menú.
+        def colision_cono (self):
+            pos1 = self.canvas.bbox(self.robot)
+            pos2 = self.canvas.bbox(self.cono)
+            if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
+                self.canvas.move(self.robot, 0, 0)
+                print ("¡Colisión Cono!")
 
+        def colision_arbol (self):
+            pos1 = self.canvas.bbox(self.robot)
+            pos2 = self.canvas.bbox(self.arbol)
+            if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
+                self.canvas.move(self.robot, 0, 0)
+                print ("¡Colisión Árbol!")
+
+        def medicion (self,temp):
+            #temp = 0
+            if temp == 120:
+                return temp
+            else: 
+                #temp += 20
+                return medicion(self,temp +20)
 
         #Movimientos del robot
 
         def move_left(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
-            p = self.master.coords.self.robot
-            c = self.cono
             if(x1 <= 0):
                 return
             else:
                 self.canvas.move(self.robot, -5, 0)
-                print("Left")
+                colision_cono(self)
+                colision_arbol(self)
+                medicion(self,0)
+                #print("Left")
 
 
         def move_right(temp):
@@ -178,28 +209,39 @@ class escenario2:
                 return
             else:
                 self.canvas.move(self.robot, 5, 0)
-                print("Right")
+                colision_cono(self)
+                colision_arbol(self)
+                medicion(self,0)
+                #print("Right")
 
         def move_up(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y1 <= 0):
                 return
             else:
-                self.canvas.move(self.robot, 0, -5) 
-                print("Up") 
+                self.canvas.move(self.robot, 0, -5)
+                colision_cono(self)
+                colision_arbol(self)
+                medicion(self,0) 
+                #print("Up") 
 
         def move_down(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y2 >= self.canvas.winfo_height() -5):
                 return
             else:
-                self.canvas.move(self.robot, 0, 5)  
-                print("Down")
+                self.canvas.move(self.robot, 0, 5)
+                colision_cono(self)
+                colision_arbol(self)
+                medicion(self,0)  
+                #print("Down")
         
         self.master.bind('d', move_right)
         self.master.bind('a', move_left)
         self.master.bind('w', move_up)
         self.master.bind('s', move_down)
+
+        print(self.canvas.bbox(self.cono))
 
         self.master.mainloop()
 
