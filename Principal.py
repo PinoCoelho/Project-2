@@ -2,6 +2,7 @@ from tkinter import *
 import os
 #import prueba
 
+
 class iniciador:
 
     def __init__(self):
@@ -17,22 +18,23 @@ class iniciador:
         imagen = PhotoImage(file=self.ruta)
         return imagen
 
+    
     def inicio (self):
         self.ventana = Tk() #Se crea la ventana principal.
         self.ventana.title("ROBOT") #Titulo de la pantalla principal. 
         self.ventana.minsize(600,700) #Dimensiones de la pantalla.
         self.ventana.resizable(width=NO,height=NO) #Que no se puede modificar. 
         self.fondo = iniciador.cargarImagen(self,"robot_fondo2.gif") #Pone la imagen de fondo. 
-        self.canvas = Canvas(self.ventana, width=700, height=700, bg="purple")
+        self.canvas = Canvas(self.ventana, width=700, height=700, bg="purple")#Crea el canvas
         self.canvas.place(x=0, y=0)
         self.canvas.create_image(0, 0, image=self.fondo, anchor="nw")
-        self.LabelFondo=Label(self.ventana, image=self.fondo) #Etiqueta que va a contener la imagen.
-        self.LabelFondo.place (x=0, y=0) #Posición de la imagen.
+        # self.LabelFondo=Label(self.ventana, image=self.fondo) #Etiqueta que va a contener la imagen.
+        # self.LabelFondo.place (x=0, y=0) #Posición de la imagen.
         self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="#33AA5C",fg="black",height= 2,width=7,command= self.scene) #Botón para entrar a la pantalla secundaria llamada game.
         self.Boton_iniciar.place(x=308,y=450, anchor = "center")
         self.Boton_salir = Button (self.ventana,text="APAGAR", bg="#33AA5C",fg="black",height= 2,width=7,command= self.ventana.destroy)#Boton para apagar el programa
         self.Boton_salir.place (x= 510,y= 20)
-        self.Boton_about = Button (self.ventana,text="ABOUT", bg="#33AA5C",fg="black",height= 2,width=7)#Boton pantalla about
+        self.Boton_about = Button (self.ventana,text="ABOUT", bg="#33AA5C",fg="black",height= 2,width=7,command= self.about)#Boton pantalla about
         self.Boton_about.place (x= 50,y= 20)
         self.Boton_presentacion = Button (self.ventana,text="PRESENTACION", bg="#33AA5C",fg="black",height= 2,width=12)#Boton pantalla about
         self.Boton_presentacion.place (x= 120,y= 20)
@@ -66,5 +68,19 @@ class iniciador:
         self.Boton_escenario1 = Button(self.root,text="INICIAR",bg="red",fg="yellow",height= 2,width=7)
         self.Boton_escenario1.place(x=308,y=450, anchor = "center")
         self.root.mainloop()
+    
+    def about(self):
+        self.root = Toplevel()
+        self.root.title("ABOUT") #Titulo de la pantalla principal. 
+        self.root.minsize(600,700) #Dimensiones de la pantalla.
+        self.root.resizable(False,False) #Que no se puede modificar. 
+        self.fondo = iniciador.cargarImagen(self,"robot_fondo2.gif")
+        self.canvas = Canvas(self.root, width=700, height=700, bg="purple")
+        self.canvas.place(x=0, y=0)
+        self.canvas.create_image(0, 0, image=self.fondo, anchor="nw")
+        self.Boton_return = Button(self.root,text="ATRAS",bg="red",fg="yellow",height= 2,width=7, command=self.root.destroy)
+        self.Boton_return.place(x=308,y=450, anchor = "center")
+        self.root.mainloop()
+
 
 iniciador()
