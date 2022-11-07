@@ -109,7 +109,9 @@ class escenario2:
     def __init__(self, master = None):
         self.master = master
         self.create()
- 
+        self.temp = 0
+
+
     def create(self):
  
         self.master = Tk()
@@ -163,6 +165,11 @@ class escenario2:
 
         self.canvas.pack(fill = BOTH, expand = True)
 
+        self.temperatura1 = 0
+        self.temperatura2 = 20
+        self.temperatura3 = 5
+        self.temperatura4 = 15
+
         #self.menubar = Menu(self.master) #Se crea la barra del menú.
         #self.menubar.add_command(label="PRESENTACIÓN",command= print("Ola")) #Se crea el comando para que.
         #self.master.config(menu=self.menubar) #Se posiciona la barra del menú.
@@ -181,68 +188,62 @@ class escenario2:
                 self.canvas.move(self.robot, 0, 0)
                 print ("¡Colisión Árbol!")
 
-        def medicion (self,temp):
-            #temp = 0
-            if temp == 120:
-                return temp
-            else: 
-                #temp += 20
-                return medicion(self,temp +20)
-
         #Movimientos del robot
 
         def move_left(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
+            
             if(x1 <= 0):
-                return
+                self.temperatura1 += 1
+                print(self.temperatura1)
             else:
                 self.canvas.move(self.robot, -5, 0)
                 colision_cono(self)
                 colision_arbol(self)
-                medicion(self,0)
                 #print("Left")
 
 
         def move_right(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(x2 >= self.canvas.winfo_width() -5):
-                return
+                self.temperatura2 += 1
+                print(self.temperatura2)
             else:
                 self.canvas.move(self.robot, 5, 0)
                 colision_cono(self)
                 colision_arbol(self)
-                medicion(self,0)
                 #print("Right")
 
         def move_up(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y1 <= 0):
-                return
+                self.temperatura3 += 1
+                print(self.temperatura3)
             else:
                 self.canvas.move(self.robot, 0, -5)
                 colision_cono(self)
                 colision_arbol(self)
-                medicion(self,0) 
                 #print("Up") 
 
         def move_down(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y2 >= self.canvas.winfo_height() -5):
-                return
+                self.temperatura4 += 1
+                print (self.temperatura4)
             else:
                 self.canvas.move(self.robot, 0, 5)
                 colision_cono(self)
                 colision_arbol(self)
-                medicion(self,0)  
                 #print("Down")
         
         self.master.bind('d', move_right)
         self.master.bind('a', move_left)
         self.master.bind('w', move_up)
         self.master.bind('s', move_down)
-
-        print(self.canvas.bbox(self.cono))
-
+        self.total_temp = self.temperatura1 + self.temperatura2 + self.temperatura3 + self.temperatura4
+        print (self.total_temp)
+        #print(self.canvas.bbox(self.cono))
+        #print (self.temp)
         self.master.mainloop()
 
         
