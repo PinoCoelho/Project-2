@@ -1,24 +1,59 @@
 from tkinter import *
 import os
-
+#import Escenarios
 
 class iniciador:
 
     def __init__(self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
         self.inicio()
         self.scene = iniciador.scene
 
     def cargarImagen(self,nombre): #Funcion para cargar la imagen. 
         """
-        Funcion simple que permite cargar las imagenes para poder usarse.
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
 
         """
+
         self.ruta = os.path.join('Images',nombre) #Se define la ubicación de la imagen.
         imagen = PhotoImage(file=self.ruta)
         return imagen
 
     
     def inicio (self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
         self.ventana = Tk() #Se crea la ventana principal.
         self.ventana.title("ROBOT") #Titulo de la pantalla principal. 
         self.ventana.minsize(600,700) #Dimensiones de la pantalla.
@@ -31,11 +66,11 @@ class iniciador:
         # self.LabelFondo.place (x=0, y=0) #Posición de la imagen.
         self.Boton_iniciar = Button(self.ventana,text="INICIAR",bg="#33AA5C",fg="black",height= 2,width=7,command= self.scene) #Botón para entrar a la pantalla secundaria llamada game.
         self.Boton_iniciar.place(x=308,y=450, anchor = "center")
-        self.Boton_salir = Button (self.ventana,text="APAGAR", bg="#33AA5C",fg="black",height= 2,width=7,command= self.ventana.destroy)#Boton para apagar el programa
+        self.Boton_salir = Button (self.ventana,text="APAGAR", bg="#33AA5C",fg="black",height= 2,width=7,command= self.ventana.destroy) #Boton para apagar el programa
         self.Boton_salir.place (x= 510,y= 20)
-        self.Boton_about = Button (self.ventana,text="ABOUT", bg="#33AA5C",fg="black",height= 2,width=7,command= self.about)#Boton pantalla about
+        self.Boton_about = Button (self.ventana,text="ABOUT", bg="#33AA5C",fg="black",height= 2,width=7,command= self.about) #Boton pantalla about
         self.Boton_about.place (x= 50,y= 20)
-        self.Boton_presentacion = Button (self.ventana,text="PRESENTACION", bg="#33AA5C",fg="black",height= 2,width=12)#Boton pantalla about
+        self.Boton_presentacion = Button (self.ventana,text="PRESENTACION", bg="#33AA5C",fg="black",height= 2,width=12) #Boton de presentación
         self.Boton_presentacion.place (x= 120,y= 20)
         self.Label_text_nombre = Label (self.ventana, text="Por favor introduce un nombre al robot:", bg = "#67B59C", fg = "black")
         self.Label_text_nombre.place (x= 310,y=200,anchor="center")
@@ -54,8 +89,22 @@ class iniciador:
         self.Entry_fabricante = Entry(self.ventana, width=25, bg="light green")
         self.Entry_fabricante.place (x= 310,y= 410,anchor="center")
         self.ventana.mainloop() #El loop principal de toda la pantalla principal
+    
 
     def scene (self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
         self.root = Toplevel()
         self.root.title("ROBOT") #Titulo de la pantalla principal. 
         self.root.minsize(600,700) #Dimensiones de la pantalla.
@@ -64,21 +113,40 @@ class iniciador:
         self.canvas = Canvas(self.root, width=700, height=700, bg="purple")
         self.canvas.place(x=0, y=0)
         self.canvas.create_image(0, 0, image=self.fondo, anchor="nw")
-        self.Boton_escenario1 = Button(self.root,text="INICIAR",bg="red",fg="yellow",height= 2,width=7)
-        self.Boton_escenario1.place(x=308,y=450, anchor = "center")
+        self.Boton_atras = Button(self.root,text="ATRÁS",bg="green",fg="yellow",height= 2,width=7,command= self.root.destroy)
+        self.Boton_atras.place(x=308,y=450, anchor = "center")
+        self.Boton_escenario1 = Button(self.root,text="ESCENARIO 1",bg="green",fg="yellow",height= 2,width=10)
+        self.Boton_escenario1.place(x=210,y=300, anchor = "center")
+        self.Boton_escenario2 = Button(self.root,text="ESCENARIO 2",bg="green",fg="yellow",height= 2,width=10)
+        self.Boton_escenario2.place(x=410,y=300, anchor = "center")
         self.root.mainloop()
     
     def about(self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
         self.root = Toplevel()
         self.root.title("ABOUT") #Titulo de la pantalla principal. 
         self.root.minsize(600,700) #Dimensiones de la pantalla.
         self.root.resizable(False,False) #Que no se puede modificar. 
         self.fondo = iniciador.cargarImagen(self,"robot_fondo2.gif")
+        self.info = iniciador.cargarImagen(self,"info.gif")
         self.canvas = Canvas(self.root, width=700, height=700, bg="purple")
         self.canvas.place(x=0, y=0)
         self.canvas.create_image(0, 0, image=self.fondo, anchor="nw")
+        self.canvas.create_image(80, 180, image=self.info, anchor="nw")
         self.Boton_return = Button(self.root,text="ATRAS",bg="red",fg="yellow",height= 2,width=7, command=self.root.destroy)
-        self.Boton_return.place(x=308,y=450, anchor = "center")
+        self.Boton_return.place(x=308,y=490, anchor = "center")
         self.root.mainloop()
 
 

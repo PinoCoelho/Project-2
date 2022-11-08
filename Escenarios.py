@@ -3,11 +3,35 @@ from tkinter.ttk import *
  
 class escenario1:
 
-    def __init__(self, master = None):
-        self.master = master
-        self.create()
+    def __init__(self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
+        self.create ()
  
     def create(self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
  
         self.master = Tk()
 
@@ -57,11 +81,33 @@ class escenario1:
 
         self.canvas.pack(fill = BOTH, expand = True)
 
+        global temperatura1
+        global temperatura2
+        temperatura1 = 20
+        temperatura2 = 10
+
+        def medidor_cono (self):
+            #global temperatura1
+            file = open(r"mediciones.txt", 'a')
+            file.write(str(temperatura1)+"\n")
+            promedio(self)
+            file.close
+
+        def medidor_abajo (self):
+            file = open(r"mediciones.txt", 'a')
+            file.write(str(temperatura2)+"\n")
+            file.close
+            promedio(self)
+
+        def promedio (self):
+           promedio = temperatura1 + temperatura2
+           print(promedio)
+
         def colision_cono (self):
             pos1 = self.canvas.bbox(self.robot)
             pos2 = self.canvas.bbox(self.cono)
             if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
-                self.canvas.move(self.robot, 0, 0)
+                medidor_cono(self)
                 print ("¡Colisión Cono!")
 
         def move_left(temp):
@@ -91,7 +137,8 @@ class escenario1:
         def move_down(temp):
             x1,y1,x2,y2=self.canvas.bbox("self.robot")
             if(y2>=self.canvas.winfo_height()-5):
-                return
+                medidor_abajo(self)
+                print("Chocó abajo")
             else:
                 self.canvas.move(self.robot,0,5)  
                 colision_cono(self)
@@ -105,14 +152,52 @@ class escenario1:
         self.master.mainloop()
 
 class escenario2:
+    """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+    """
 
     def __init__(self, master = None):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
+
         self.master = master
         self.create()
+        self.imprimir()
         self.temp = 0
 
 
     def create(self):
+        """
+                Instituto Tecnológico de Costa Rica
+                    Ingeniería en Computadores
+
+
+        Lenguaje: Python
+        Versión: 10.6
+        Autores: Joseph Herra y Evan Salas
+        Versión del programa: Windows 11 
+        Última modificación: 7/11/2022
+
+        """
  
         self.master = Tk()
 
@@ -165,10 +250,27 @@ class escenario2:
 
         self.canvas.pack(fill = BOTH, expand = True)
 
-        self.temperatura1 = 0
-        self.temperatura2 = 20
-        self.temperatura3 = 5
-        self.temperatura4 = 15
+        global temperatura1
+        global temperatura2
+        temperatura1 = 20
+        temperatura2 = 10
+
+        def medidor_cono (self):
+            #global temperatura1
+            file = open(r"mediciones.txt", 'a')
+            file.write(str(temperatura1)+"\n")
+            promedio(self)
+            file.close
+
+        def medidor_borde_derecho (self):
+            file = open(r"mediciones.txt", 'a')
+            file.write(str(temperatura2)+"\n")
+            file.close
+            promedio(self)
+
+        def promedio (self):
+           promedio = temperatura1 + temperatura2
+           print(promedio)
 
         #self.menubar = Menu(self.master) #Se crea la barra del menú.
         #self.menubar.add_command(label="PRESENTACIÓN",command= print("Ola")) #Se crea el comando para que.
@@ -178,24 +280,21 @@ class escenario2:
             pos1 = self.canvas.bbox(self.robot)
             pos2 = self.canvas.bbox(self.cono)
             if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
-                self.canvas.move(self.robot, 0, 0)
+                medidor_cono(self)
                 print ("¡Colisión Cono!")
 
         def colision_arbol (self):
             pos1 = self.canvas.bbox(self.robot)
             pos2 = self.canvas.bbox(self.arbol)
             if pos2[0] < pos1[2] < pos2[2] and pos2[1] < pos1[1] < pos2[3]:
-                self.canvas.move(self.robot, 0, 0)
                 print ("¡Colisión Árbol!")
 
         #Movimientos del robot
 
         def move_left(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
-            
             if(x1 <= 0):
-                self.temperatura1 += 1
-                print(self.temperatura1)
+                return
             else:
                 self.canvas.move(self.robot, -5, 0)
                 colision_cono(self)
@@ -206,8 +305,8 @@ class escenario2:
         def move_right(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(x2 >= self.canvas.winfo_width() -5):
-                self.temperatura2 += 1
-                print(self.temperatura2)
+                medidor_borde_derecho(self)
+                print("Chocó con el borde derecho")
             else:
                 self.canvas.move(self.robot, 5, 0)
                 colision_cono(self)
@@ -217,8 +316,7 @@ class escenario2:
         def move_up(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y1 <= 0):
-                self.temperatura3 += 1
-                print(self.temperatura3)
+                return
             else:
                 self.canvas.move(self.robot, 0, -5)
                 colision_cono(self)
@@ -228,8 +326,7 @@ class escenario2:
         def move_down(temp):
             x1, y1, x2, y2 = self.canvas.bbox("self.robot")
             if(y2 >= self.canvas.winfo_height() -5):
-                self.temperatura4 += 1
-                print (self.temperatura4)
+                return
             else:
                 self.canvas.move(self.robot, 0, 5)
                 colision_cono(self)
@@ -240,12 +337,10 @@ class escenario2:
         self.master.bind('a', move_left)
         self.master.bind('w', move_up)
         self.master.bind('s', move_down)
-        self.total_temp = self.temperatura1 + self.temperatura2 + self.temperatura3 + self.temperatura4
-        print (self.total_temp)
-        #print(self.canvas.bbox(self.cono))
-        #print (self.temp)
         self.master.mainloop()
-
+    
+    def imprimir (self):
+        print (escenario2.__doc__())
         
         
 """        
